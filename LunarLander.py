@@ -30,7 +30,7 @@ def game():
 #whilst spacecraft is still flying (h>0), this code runs
     while h > 0:
             t = t + 1
-            vel = 1.6*t - 0.15*fl #0.15 is an artibrary constant. If it is lower, game is harder
+            vel = 1.6*t - 0.3*fl #0.15 is an artibrary constant. If it is lower, game is harder
             h = h - vel
             f = f-fl
 
@@ -38,33 +38,32 @@ def game():
                 print('You have successfully landed the lander, contratulations!')
                 print('Height is: 0m', 'Velocity is: '+ str(vel)+'m/s', 'Fuel left is: ' + str(f) + 'l',
                       'Time is: ' + str(t) + 's')
-            else:
-                if f<=0:
-                    print('Height is: '+ str(h) + 'm,', 'Velocity is: ' + str(vel)+'m/s,', 'Fuel left is: ' + str(f) + 'l,','Time is: ' + str(t)+'s')
-                    print('There is no more fuel left and you have not landed. You have lost.')
-                    restart = input("\nDo you want to restart the program? [y/n] > ")
+            elif f<=0 and h>0:
+                print('Height is: '+ str(h) + 'm,', 'Velocity is: ' + str(vel)+'m/s,', 'Fuel left is: ' + str(f) + 'l,','Time is: ' + str(t)+'s')
+                print('There is no more fuel left and you have not landed. You have lost.')
+                restart = input("\nDo you want to restart the game? [y/n] > ")
 
+                if restart == "y":
+                    game()
+                else:
+                    print("\nThe game will be closed...")
+                    sys.exit(0)
+            else:
+                print('Height is: ' + str(h)+' m.', 'Velocity is: ' + str(vel)+' m/s', 'Fuel left is:'+str(f)+ 'l.', 'Time is: ' + str(t)+'s')
+                if h<=0:
+                    print('\nYou have lost. The lander has crashed.')
+                    restart = input("\nDo you want to play again? [y/n] > ")
                     if restart == "y":
                         game()
                     else:
                         print("\nThe programm will me closed...")
                         sys.exit(0)
-                else:
-                    print('Height is: ' + str(h)+' m.', 'Velocity is: ' + str(vel)+' m/s', 'Fuel left is:'+str(f)+ 'l.', 'Time is: ' + str(t)+'s')
-                    if h<=0:
-                        print('\nYou have lost. The lander has crashed. Please play again.')
-                        restart = input("\nDo you want to restart the program? [y/n] > ")
-                        if restart == "y":
-                            game()
-                        else:
-                            print("\nThe programm will me closed...")
-                            sys.exit(0)
-                    print('Next go. How much fuel do you want to use?')
-                    fuelleft = f
-                    fl = float(input())
-                    while not 0<=fl<=fuelleft:
-                        print('You cant use more fuel than you have left. Please enter between: 0 and ', str(fuelleft))
-                        fl =float(input())
+                #carry on playing till the fuel runs out or spaceship crash lands
+                print('Next go. How much fuel do you want to use?')
+                fl = float(input())
+                while not 0<=fl<=f:
+                    print('You cant use more fuel than you have left. Please enter between: 0 and ', str(fuelleft))
+                    fl =float(input())
 
     if h<=0:
         print('You have finished playing the game, do you want to play again?')
