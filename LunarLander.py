@@ -1,4 +1,3 @@
-#Lunar Lander project
 # This program is a game which is about trying to land a space ship on the moom.
 # The program aks the user how much of the fuel it should burn to decellerate
 # the space ship. The idea of the program is to land on the moon without crashing.
@@ -10,7 +9,6 @@ f = 1000  # fuel in litres
 fl = 0
 t = 0   #time at start
 fuelleft=0
-
 
 print('Try to make the spaceship land safely')
 print('On each turn, type in the amount of fuel you want to use to slow down the spaceship')
@@ -50,3 +48,19 @@ while h > 0:
                 while not 0<=fl<=fuelleft:
                     print('You cant use more fuel than you have left. Please enter between: 0 and ', str(fuelleft))
                     fl =float(input())
+
+
+
+if h<=0:
+    print('You have finished playing the game, do you want to play again?')
+    print('Please enter Y or N:')
+    game_replay = input()
+
+    if game_replay == 'Y':
+        print('simply run the .py file again')
+        sys.exit()
+    elif game_replay =='N':
+        print('close the game down by closing this window')
+        sys.exit()
+    else:
+        print('Incorrect input. The game will stop. If you want to play again, simply run the game file again.')
