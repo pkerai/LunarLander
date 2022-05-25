@@ -13,22 +13,21 @@ def game():
     h = 1000  # height in metres
     vel = 0  # velocity in m/s
     f = 1000  # fuel in litres
-    fl = 0
+    fl = -1
     t = 0   #time at start
     fuelleft=0
 
-    print('Try to make the spaceship land safely')
-    print('On each turn, type in the amount of fuel you want to use to slow down the spaceship')
-    print('Careful though! You only have 1000 litres! Ready, set, go!')
-
-    print('How much fuel do you want to use on this turn? Positive numbers only!') #first turn
-    fl = float(input())
-
+    print('Welcome to the Lunar Lander game. The objective of the game is to try to make the spaceship land safely.')
+    print('On each turn, enter the amount of fuel you want to use to slow down the spaceship')
+    print('Careful though! You only have a total of 1000 litres of fuel! Ready, set, go!')
+    print('How much fuel do you want to use? Positive numbers only!') #first turn
+#first fuel input here
     while not 0<=fl<=1000:
-        print('enter a positive number between 0 and 1000.')
-        fl = float(input())
-
-
+        try:
+            fl = float(input('Enter a positive number between 0 and 1000.\n'))
+        except ValueError:
+            print ("fuel left must be a number, try again")
+#whilst spacecraft is still flying (h>0), this code runs
     while h > 0:
             t = t + 1
             vel = 1.6*t - 0.15*fl #0.15 is an artibrary constant. If it is lower, game is harder
@@ -69,14 +68,13 @@ def game():
 
     if h<=0:
         print('You have finished playing the game, do you want to play again?')
-        print('Please enter Y or N:')
+        print('Please enter y or n:')
         game_replay = input()
 
-        if game_replay == 'Y':
-            print('simply run the .py file again')
-            sys.exit()
-        elif game_replay =='N':
-            print('close the game down by closing this window')
+        if game_replay == 'y':
+            game()
+        elif game_replay =='n':
+            print('Game will close')
             sys.exit()
         else:
             print('Incorrect input. The game will stop. If you want to play again, simply run the game file again.')
